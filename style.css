@@ -1,3 +1,7 @@
+:root {
+  --orange-color: #f89e09;
+}
+
 * {
   font-size: 20px;
   text-align: justify;
@@ -18,15 +22,31 @@ h1 {
 }
 
 p.curiosidade {
-  border: #f89e09 1px solid;
+  border: var(--orange-color) 1px solid;
   border-radius: 10px;
   padding: 10px;
   background-image: url(/imgs/favo-de-mel.png);
+  min-height: 35px;
 }
 
 p.curiosidade img {
   float: left;
   margin-right: 20px;
+}
+
+img.casta-de-abelha {
+  border-radius: 50%;
+  border: 5px double var(--orange-color);
+}
+
+img.esquerda {
+  float: left;
+  margin-right: 20px;
+}
+
+img.direita {
+  float: right;
+  margin-left: 20px;
 }
 
 img#logo {
