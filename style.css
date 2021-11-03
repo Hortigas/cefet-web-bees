@@ -21,6 +21,39 @@ h1 {
   font-size: 30px;
 }
 
+a {
+  text-decoration: none;
+}
+
+a:link {
+  color: blue;
+}
+
+a:active {
+  color: invert(blue);
+  text-decoration: none;
+}
+
+a:visited {
+  color: gray;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a[href^="http"] {
+  color: purple;
+}
+
+p:last-of-type {
+  text-align: right;
+}
+
+img:not(img[alt]) {
+  border: 5px solid red;
+}
+
 p.curiosidade {
   border: var(--orange-color) 1px solid;
   border-radius: 10px;
