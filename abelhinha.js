@@ -3,29 +3,28 @@ const ALTURA_ABELHA = 11;
 
 let abelhinhas = [];
 
-
 // função que cria uma abelhinha
 function Abelhinha(tempoAtrasoParaIniciar) {
-  this.el = document.createElement('img');
-  this.el.src = 'imgs/abelha-voadora.gif';
-  this.el.style.width = LARGURA_ABELHA + 'px';
-  this.el.style.position = 'fixed';
-  this.el.style.bottom = '25vh';
-  this.el.style.left = -LARGURA_ABELHA + 'px';
-  this.el.alt = 'Uma abelhinha batendo asas feita em pixel art';
+  this.el = document.createElement("img");
+  this.el.src = "imgs/abelha-voadora.gif";
+  this.el.style.width = LARGURA_ABELHA + "px";
+  this.el.style.position = "fixed";
+  this.el.style.bottom = "25vh";
+  this.el.style.left = -LARGURA_ABELHA + "px";
+  this.el.alt = "Uma abelhinha batendo asas feita em pixel art";
 
   this.el = document.body.appendChild(this.el);
 
   this.posiciona(tempoAtrasoParaIniciar);
 }
 
-Abelhinha.prototype.remove = function() {
+Abelhinha.prototype.remove = function () {
   document.body.removeChild(this.el);
 };
 
-Abelhinha.prototype.posiciona = function(tempoAtrasoParaIniciar) {
+Abelhinha.prototype.posiciona = function (tempoAtrasoParaIniciar) {
   this.porcentagemTrajeto = 0;
-  
+
   // qual posição x inicial e final da abelha
   // sempre surgem da esquerda e vão para a direita
   this.xInicial = 0 - LARGURA_ABELHA;
@@ -38,21 +37,21 @@ Abelhinha.prototype.posiciona = function(tempoAtrasoParaIniciar) {
   this.yFinal = Math.random() * (UM_QUARTO_DA_ALTURA_DA_JANELA - ALTURA_ABELHA);
   this.el.style.transform = `translate(${this.xInicial}px, ${this.yInicial}px)`;
 
-  // duração da animação: de 3s até 6s (aleatório) 
+  // duração da animação: de 3s até 6s (aleatório)
   this.tempoTrajeto = 3000 + Math.random() * 3000;
 
   // tempo que a abelha vai esperar até surgir (especificado no parâmetro ou algo enre 0s e 7s)
   this.tempoAtrasoParaIniciar = tempoAtrasoParaIniciar || Math.random() * 7000;
 };
 
-Abelhinha.prototype.atualiza = function(delta) {
+Abelhinha.prototype.atualiza = function (delta) {
   if (this.tempoAtrasoParaIniciar >= 0) {
     this.tempoAtrasoParaIniciar -= delta;
     return;
   }
   this.porcentagemTrajeto += delta / this.tempoTrajeto;
   this.x = this.xInicial + this.porcentagemTrajeto * (this.xFinal - this.xInicial);
-  this.y = this.yInicial + this.porcentagemTrajeto * (this.yFinal - this.yInicial) + Math.sin(this.porcentagemTrajeto* 4 * 3.14159) * (4*ALTURA_ABELHA);
+  this.y = this.yInicial + this.porcentagemTrajeto * (this.yFinal - this.yInicial) + Math.sin(this.porcentagemTrajeto * 4 * 3.14159) * (4 * ALTURA_ABELHA);
   this.y = Math.max(this.y, 0);
   this.el.style.transform = `translate(${this.x}px, ${this.y}px)`;
 
@@ -76,14 +75,13 @@ function atualizaAbelhinhas(agora) {
 }
 atualizaAbelhinhas(0);
 
-
 // se pressionar '+' ou '-', adiciona nova ou remove uma
 // abelha existente :P
-document.addEventListener('keyup', function(e) {
-  if (e.key === '+' || e.key === '=') {
+document.addEventListener("keyup", function (e) {
+  if (e.key === "+" || e.key === "=") {
     let novaAbelhinha = new Abelhinha(1);
     abelhinhas.push(novaAbelhinha);
-  } else if (e.key === '-' || e.key === '_') {
+  } else if (e.key === "-" || e.key === "_") {
     abelhinha = abelhinhas.pop();
     if (abelhinha) {
       abelhinha.remove();
@@ -91,7 +89,7 @@ document.addEventListener('keyup', function(e) {
   }
 });
 
-document.body.style.overflowX = 'hidden';
+document.body.style.overflowX = "hidden";
 abelhinhas.push(new Abelhinha());
 abelhinhas.push(new Abelhinha());
 abelhinhas.push(new Abelhinha());
